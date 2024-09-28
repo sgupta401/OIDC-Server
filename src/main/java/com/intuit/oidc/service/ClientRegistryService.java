@@ -5,6 +5,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
@@ -27,6 +28,9 @@ import java.util.UUID;
 @Configuration
 public class ClientRegistryService {
 
+
+    @Value("${resourceserver.host}")
+    private String resourceServer;
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -35,8 +39,8 @@ public class ClientRegistryService {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://localhost:8080/callback")
-                .postLogoutRedirectUri("http://127.0.0.1:8080/")
+                .redirectUri(resourceServer+ "/callback")
+                .postLogoutRedirectUri(resourceServer + "/logout")
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 .scope(OidcScopes.EMAIL)
