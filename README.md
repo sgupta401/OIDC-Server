@@ -1,8 +1,8 @@
 # Design
 
-This is spring boot based OIDC server built using `spring-boot-starter-oauth2-authorization-server` and `spring-boot-starter-security`. Boilerplate functionalities related to OIDC server like /authorization, /token, /userinfo endpoints are provided out of the box. Along with that, it provide the basic authentication and consent pages. Spring  security handles the authentication of the user. Once the user is authenticated, the consent is checked and if consent is available, the user is redirected back to the redirect url sent in the authorization parameters. If the consent is not avaialble, the consent is taken from user on the consent page. 
+This is an OIDC server built on Spring Boot, utilizing the `spring-boot-starter-oauth2-authorization-server` and `spring-boot-starter-security`. It comes equipped with essential OIDC server functionalities such as the `/authorization`, `/token`, and `/userinfo` endpoints right out of the box. Additionally, it includes basic authentication and consent pages. Spring Security manages user authentication. After authentication, user consent is verified. If consent is already provided, users are redirected back to the redirect URL specified in the authorization parameters. If consent is absent, users can give their consent on the consent page.
 
-Features used are
-1. /token endpoint - To exchange the access code to id and access tokens
-2. /authorize endpoint - To authenticate the user and get the access code 
-3. /jwks endpoint - To get the RSA public key details
+### Key Features used in this project:
+- **/token endpoint**: Exchanges the access code for ID and access tokens.
+- **/authorize endpoint**: Authenticates the user and issues the access code.
+- **/jwks endpoint**: Provides details of the RSA public key.
